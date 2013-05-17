@@ -1,0 +1,17 @@
+<%namespace name="utils" file="utils.html"/>
+
+% if thing.connections:
+${utils._md("Following is a list of users you have connected with.", wrap=True)}
+
+<ol>
+% for account in thing.connections:
+  <li><a href="/user/${account.name}">/u/${account.name}</a></li>
+% endfor
+</ol>
+% else:
+${utils._md("You haven't connected with anyone yet.", wrap=True)}
+% endif
+
+<div class="md meatspace-home-link">
+  <p><a href="/meetup/${thing.meetup._id}">${_("back to meetup overview")}</a></p>
+</div>

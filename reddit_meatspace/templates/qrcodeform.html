@@ -1,0 +1,40 @@
+<%!
+  from r2.lib.filters import safemarkdown
+%>
+
+<%namespace name="utils" file="utils.html"/>
+
+% if thing.connected_with:
+<div class="md connection-success">
+  ${unsafe(safemarkdown(_("Success! You have successfully connected with /u/{user}.").format(user=thing.connected_with.name), wrap=False))}
+</div>
+% endif
+
+${utils._md("Enter below the username and secret code of the person you met.", wrap=True)}
+
+<div class="md">
+<p><a href="/meetup/${thing.meetup._id}/connections">${_("See who you've already connected with.")}</a></p>
+</div>
+
+<form onsubmit="return post_form(this, 'meetup_connect')" id="qrcode-form" action="/api/meetup_connect" method="POST">
+  <input type="hidden" name="codename" value="${thing.meetup._id}">
+
+  <%utils:round_field title="${_('other redditor\'s username')}" css_class="spacer">
+    <input name="username" autocomplete="off" type="text" inputmode="verbatim" value="${thing.other.name if thing.other else ""}" required>
+    ${utils.error_field("USER_DOESNT_EXIST", "username", "span")}
+    ${utils.error_field("NO_USER", "username", "span")}
+    ${utils.error_field("MEETUP_NOT_WITH_SELF", "username", "span")}
+  </%utils:round_field>
+
+  <%utils:round_field title="${_('other redditor\'s secret code')}" css_class="spacer">
+    <input name="code" autocomplete="off" type="text" pattern="[0-9]*" maxlength="2" value="${thing.code if thing.code is not None else ""}">
+    ${utils.error_field("MEETUP_INVALID_CODE", "code", "span")}
+  </%utils:round_field>
+
+  <button type="submit">${_("submit")}</button>
+  <span class="status"></span>
+</form>
+
+<div class="md meatspace-home-link">
+  <p><a href="/meetup/${thing.meetup._id}">${_("back to meetup overview")}</a></p>
+</div>

@@ -1,0 +1,257 @@
+/* get rid of the infobar since it totally borks the
+   full bleed layout */
+.infobar {
+    display: none !important;
+}
+
+header {
+    background: transparent url(../meatspace-header-bg.jpg) top center no-repeat;
+    text-align: center;
+    padding: 10em 0 1.5em 0;
+    color: white;
+    text-shadow: 0 0 10px black, 0 0 3px black;
+    font-weight: bold;
+    margin: -10px -5px 2em -5px;
+
+    h1 {
+        font-size: xx-large;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: large;
+    }
+}
+
+nav {
+    width: 630px;
+    margin: 3em auto 0 auto;
+    overflow: auto;
+
+    li {
+        margin-left: 20px;
+        display: inline-block;
+
+    }
+
+    li:first-child {
+        margin-left: 0;
+    }
+}
+
+ol {
+    width: 660px;
+    margin: 0 auto;
+    list-style: inside decimal;
+
+    li {
+        font-size: large;
+        overflow: auto;
+        margin-top: 1em;
+
+        h1 {
+            display: inline-block;
+        }
+
+        img {
+            float: left;
+            width: 120px;
+            height: 120px;
+            margin: 0 1em 1em 0;
+            border: 3px solid black;
+        }
+
+        p {
+            font-size: small;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+    }
+
+    li:nth-child(even) img {
+        float: right;
+        margin: 0 0 1em 1em;
+    }
+}
+
+body.meatspace-page {
+    .md {
+        width: 660px;
+        margin: 0 auto 1em auto;
+        text-align: center;
+    }
+
+    .md.meatspace-home-link {
+        margin-top: 1em;
+    }
+
+    .meatspace-home-link a:before {
+        content: "\00ab";
+        margin-right: 1em;
+    }
+}
+
+body.meatspace-portal {
+    .md {
+        text-align: justify;
+    }
+}
+
+@button-text: #dfd;
+
+a.meatspace-button {
+    float: left;
+    width: 170px;
+    display: block;
+    text-align: center;
+    padding: 5px 5px;
+    border: 2px solid #2f522f;
+    line-height: 22px;
+    border-radius: 5px;
+    text-shadow: 0 1px 1px #2c2c2c;
+    color: @button-text;
+    font-weight: bold;
+    font-size: 16px;
+    background: url(../meatspace-button-bg.png) left top repeat-x;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, .3);
+    margin-bottom: 3px;
+}
+
+a.meatspace-button:hover {
+    color: lighten(@button-text, 10%);
+    background-position: left bottom;
+}
+
+a.meatspace-button:active {
+    margin: 3px 0 0 0;
+    box-shadow: none;
+}
+
+a.meatspace-button.disabled,
+a.meatspace-button.disabled:hover,
+a.meatspace-button.disabled:active {
+    border-color: #aaa;
+    background: #ccc;
+    color: #999;
+    text-shadow: none;
+    box-shadow: none;
+    margin: 0 0 3px 0;
+    cursor: default;
+}
+
+.badge-page .content > p {
+    margin: 2em 0;
+    font-size: small;
+    text-align: center;
+}
+
+#badge {
+    margin: 0 auto;
+    width: 800px;
+    border: 2px solid #010;
+    overflow: auto;
+    padding: 40px;
+    border-radius: 5px;
+    font-size: 14pt;
+
+    table {
+        float: left;
+        border-spacing: 0 .5em;
+        border-collapse: separate;
+
+        caption {
+            font-size: 18pt;
+            padding-bottom: .2em;
+
+            .code {
+                margin-left: 1em;
+                font-size: 12pt;
+            }
+        }
+
+        th {
+            padding-right: 2em;
+        }
+
+        td.blank {
+            border-bottom: 1px dotted black;
+            min-width: 300px;
+        }
+    }
+
+    .qrcode {
+        float: right;
+        text-align: center;
+        font-size: 10pt;
+
+        .placeholder {
+            height: 230px;
+            width: 230px;
+        }
+
+        p {
+            margin-top: 1em;
+        }
+    }
+}
+
+#qrcode-form {
+    margin: 0 auto;
+    width: 500px;
+}
+
+table.conversation-starters {
+    width: 600px;
+    margin: 0 auto;
+
+    a.meatspace-button {
+        font-size: 14px;
+        line-height: 18px;
+        width: 120px;
+        float: none;
+        display: inline-block;
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) th,
+    tr:nth-child(even) td {
+        background: #eee;
+    }
+
+    td.button-cell {
+        text-align: right;
+    }
+}
+
+.md.connection-success {
+    border: 2px solid #aca;
+    color: black;
+    background: #efe;
+    border-radius: 5px;
+}
+
+@media print {
+    @page {
+        size: landscape;
+    }
+
+    .badge-page {
+        #header,
+        .footer-parent,
+        .debuginfo,
+        .content > p,
+        .top-bar-container {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<%!
+  from r2.lib.filters import safemarkdown
+%>
+
+${unsafe(safemarkdown(_("Choose a fact about your account to put on your badge."), wrap=True))}
+${unsafe(safemarkdown(_("You can also [have your phone scanned instead]({url}).").format(url="/meetup/" + thing.meetup._id + "/mobile_badge"), wrap=True))}
+
+<table class="conversation-starters">
+  % for topic in thing.topics:
+  <tr>
+    <th scope="row">${topic["title"]}</th>
+    <td>${topic["content"]}</td>
+    <td class="button-cell">
+      <a class="meatspace-button" href="/meetup/${thing.meetup._id}/badge?topic=${topic["code"]}">${_("print badge")}</a>
+    </td>
+  </tr>
+  % endfor
+</table>
+
+<div class="md meatspace-home-link">
+  <p><a href="/meetup/${thing.meetup._id}">${_("back to meetup overview")}</a></p>
+</div>

@@ -1,0 +1,72 @@
+<%!
+  from r2.lib.filters import safemarkdown
+%>
+
+<%namespace name="utils" file="utils.html"/>
+
+<header>
+  <h1>${thing.meetup.title}</h1>
+  <%block name="date">
+  <p class="meetup-date">${_("be there, or be square: {date}").format(date=thing.date_text)}</p>
+  </%block>
+
+  <%block name="buttons">
+  <nav>
+    <ul>
+      % if thing.show_finder:
+      <li>
+      <a class="meatspace-button" href="${thing.find_meetup_url}">${_("nearby meetups")}</a>
+      </li>
+      % endif
+      <li>
+        % if thing.show_badge:
+        <a class="meatspace-button" href="/meetup/${thing.meetup._id}/configure_badge">
+        % else:
+        <a class="meatspace-button disabled">
+        % endif
+          ${_("print badge")}
+        </a>
+      </li>
+      <li>
+        % if thing.show_connect:
+        <a class="meatspace-button" href="/meetup/${thing.meetup._id}/connect">
+        % else:
+        <a class="meatspace-button disabled">
+        % endif
+          ${_("scan badges")}
+        </a>
+      </li>
+      % if thing.show_connections:
+      <li>
+      <a class="meatspace-button" href="/meetup/${thing.meetup._id}/connections">${_("view connections")}</a>
+      </li>
+      % endif
+    </ul>
+  </nav>
+  </%block>
+</header>
+
+${unsafe(safemarkdown(thing.meetup.body))}
+
+<%block name="content">
+
+${utils._md("So, without further ado, here's what you need to do to get a shiny trophy.", wrap=True)}
+
+<ol>
+  <li>
+    <h1>${_("Print and bring your badge")}</h1>
+    <img src="#">
+    ${utils._md("Print out your badge. Fill in some details about yourself to spark conversation. Then take it with you to the meetup.")}
+  </li>
+  <li>
+    <h1>${_("Meet redditors")}</h1>
+    <img src="#">
+    ${utils._md("Show off your badge at the meetup. Marvel in the boxy glory of your QR code. Optionally: talk to the people you're showing your badge to.")}
+  </li>
+  <li>
+    <h1>${_("Scan and be scanned")}</h1>
+    <img src="#">
+    ${utils._md("Keep track of who you meet. If you have a smart phone, use a QR Code reader to scan the code on their badge and instantly check in with reddit. If not, write down their username and secret code and enter them in here after the meetup. **Note: you must be scanned by each person you scan for your connections to count!**")}
+  </li>
+</ol>
+</%block>

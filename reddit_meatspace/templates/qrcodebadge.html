@@ -1,0 +1,42 @@
+<%!
+  from r2.lib.filters import safemarkdown
+  from r2.lib.template_helpers import static
+%>
+
+${unsafe(safemarkdown(_("Print this badge out, fill in the blanks, and take it with you to the meetup. Please don't share your secret code online. You can also [have your phone scanned instead]({url}).").format(url="/meetup/" + thing.meetup._id + "/mobile_badge"), wrap=True))}
+
+<div id="badge">
+  <table>
+    <caption>/u/${thing.username} <span class="code">(${_("secret code: {code}").format(code=thing.code)})</span></caption>
+    <tr>
+      <th scope="row">${_("first name")}</th>
+      <td class="blank"></td>
+    </tr>
+    <tr>
+      <th scope="row">${_("hobbies")}</th>
+      <td class="blank"></td>
+    </tr>
+    <tr>
+      <th scope="row">${_("karma")}</th>
+      <td>${thing.link_karma} / ${thing.comment_karma}</td>
+    </tr>
+    <tr>
+      <th scope="row">${_("redditor since")}</th>
+      <td>${thing.registration_date}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">${thing.starter.title}</th>
+      <td>${thing.starter.content}</td>
+    </tr>
+  </table>
+
+  <div class="qrcode">
+    <div data-url="${thing.url}" class="placeholder"></div>
+    <p>${thing.pretty_url}</p>
+  </div>
+</div>
+
+<div class="md meatspace-home-link">
+  <p><a href="/meetup/${thing.meetup._id}/configure_badge">${_("choose a different fact")}</a></p>
+</div>

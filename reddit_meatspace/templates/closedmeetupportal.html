@@ -1,0 +1,20 @@
+<%inherit file="meetupportal.html"/>
+<%namespace name="utils" file="utils.html"/>
+
+<%block name="date">
+  <p class="meetup-date">${_("was on: {date}").format(date=thing.date_text)}</p>
+</%block>
+
+<%block name="buttons">
+<nav>
+  <ul>
+      <li>
+      <a class="meatspace-button" href="/meetup/${thing.meetup._id}/connections">${_("view connections")}</a>
+      </li>
+  </ul>
+</nav>
+</%block>
+
+<%block name="content">
+${utils._md("**This meetup is closed. Keep an eye on /r/blog for announcements of new meetups.**", wrap=True)}
+</%block>
