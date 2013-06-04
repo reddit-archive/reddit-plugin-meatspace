@@ -44,6 +44,10 @@ ol {
     margin: 0 auto;
     list-style: inside decimal;
 
+    &, h1 {
+        color: #369;
+    }
+
     li {
         font-size: large;
         overflow: auto;
@@ -55,11 +59,13 @@ ol {
 
         img {
             float: left;
-            margin: 0 1em 1em 0;
+            margin: 0 3em 1em 0;
         }
 
         p {
             font-size: small;
+            color: black;
+            line-height: 1.5em;
         }
 
         strong {
@@ -69,7 +75,7 @@ ol {
 
     li:nth-child(even) img {
         float: right;
-        margin: 0 0 1em 1em;
+        margin: 0 0 1em 3em;
     }
 }
 
