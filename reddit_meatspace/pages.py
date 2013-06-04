@@ -14,7 +14,7 @@ from reddit_meatspace.conversation_starters import TOPICS
 
 
 class MeatspacePage(BoringPage):
-    extra_stylesheets = ["meatspace.less"]
+    extra_stylesheets = BoringPage.extra_stylesheets + ["meatspace.less"]
     extra_page_classes = ["meatspace-page"]
 
     def __init__(self, **kwargs):
