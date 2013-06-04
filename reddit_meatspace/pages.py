@@ -80,11 +80,7 @@ class QrCodeBadge(Templated):
         self.registration_date = format_date(user._date, "medium", c.locale)
 
         self.code = "%02d" % utils.make_secret_code(meetup, user)
-
-        params = urllib.urlencode({"user": user.name, "code": self.code})
-        path = "/meetup/%s/connect?%s" % (meetup._id, params)
-        self.url = add_sr(path, sr_path=False, force_hostname=True)
-        self.pretty_url = "%s/or/%s/%s" % (g.shortdomain, user.name, self.code)
+        self.url = "%s/or/%s/%s" % (g.shortdomain, user.name, self.code)
 
         if not topic:
             topic = random.choice(TOPICS.keys())
