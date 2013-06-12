@@ -111,7 +111,8 @@ class QrCodeController(RedditController):
 
         expected_code = utils.make_secret_code(meetup, other)
         if code != expected_code:
-            g.log.warning("invalid code, got %r expected %r", code, expected_code)
+            g.log.warning("%r just tried an invalid code on %r",
+                          c.user.name, other.name)
             c.errors.add(errors.MEETUP_INVALID_CODE, field="code")
             form.set_error(errors.MEETUP_INVALID_CODE, "code")
             return
