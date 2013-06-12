@@ -1,12 +1,11 @@
 import random
-import urllib
 
 from pylons import c, g
 from pylons.i18n import _
 from babel.dates import format_date
 
 from r2.lib.pages import Templated, BoringPage, WrappedUser
-from r2.lib.template_helpers import add_sr, format_number
+from r2.lib.template_helpers import format_number
 from r2.lib.utils import Storage
 
 from reddit_meatspace import utils
@@ -68,7 +67,6 @@ class ConversationStarterSelector(Templated):
             })
 
         Templated.__init__(self)
-
 
 
 class QrCodeBadge(Templated):

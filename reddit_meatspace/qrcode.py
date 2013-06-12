@@ -1,11 +1,17 @@
 import urllib
 
-from pylons import c, g, request
+from pylons import c, g
 from pylons.controllers.util import redirect_to
 
 from r2.controllers import add_controller
 from r2.controllers.reddit_base import RedditController
-from r2.lib.validator import validate, VUser, VInt, VExistingUname, validatedForm
+from r2.lib.validator import (
+    validate,
+    validatedForm,
+    VExistingUname,
+    VInt,
+    VUser,
+)
 from r2.lib.errors import errors
 
 from reddit_meatspace import pages, validators, models, utils
