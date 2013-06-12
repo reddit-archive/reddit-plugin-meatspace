@@ -1,11 +1,19 @@
 <%namespace name="utils" file="utils.html"/>
+<%namespace file="printablebuttons.html" import="toggle_button"/>
 
 % if thing.connections:
 ${utils._md("Following is a list of users you have connected with.", wrap=True)}
 
-<ol>
-% for account in thing.connections:
-  <li><a href="/user/${account.name}">/u/${account.name}</a></li>
+<ol class="connections">
+% for connection in thing.connections:
+  <li>
+    <a href="/user/${connection.name}">/u/${connection.name}</a>
+    ${toggle_button("fancy-toggle-button", _("+ friends"), _("- friends"),
+         "friend('%s', '%s', 'friend')" % (connection.name, thing.my_fullname),
+         "unfriend('%s', '%s', 'friend')" % (connection.name, thing.my_fullname),
+         css_class = "add", alt_css_class = "remove",
+         reverse = connection.is_friend, login_required=True)}
+  </li>
 % endfor
 </ol>
 % else:

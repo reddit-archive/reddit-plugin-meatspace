@@ -5,7 +5,7 @@ from pylons import c, g
 from pylons.i18n import _
 from babel.dates import format_date
 
-from r2.lib.pages import Templated, BoringPage
+from r2.lib.pages import Templated, BoringPage, WrappedUser
 from r2.lib.template_helpers import add_sr, format_number
 from r2.lib.utils import Storage
 
@@ -99,7 +99,17 @@ class MobileQrCodeBadge(QrCodeBadge):
 
 
 class QrCodeConnections(Templated):
-    pass
+    def __init__(self, meetup, connections):
+        self.meetup = meetup
+
+        self.connections = []
+        for account in connections:
+            wrapped = WrappedUser(account)
+            wrapped.is_friend = account._id in c.user.friends
+            self.connections.append(wrapped)
+        self.my_fullname = c.user._fullname
+
+        Templated.__init__(self)
 
 
 class QrCodeForm(Templated):
