@@ -10,6 +10,7 @@ from r2.lib.validator import (
     validatedForm,
     VExistingUname,
     VInt,
+    VModhash,
     VUser,
 )
 from r2.lib.errors import errors
@@ -95,6 +96,7 @@ class QrCodeController(RedditController):
 
     @validatedForm(
         VUser(),
+        VModhash(),
         meetup=validators.VMeetup("codename"),
         other=VExistingUname("username"),
         code=VInt("code"),
