@@ -1,6 +1,7 @@
 import urllib
 
-from pylons import c, g
+from pylons import app_globals as g
+from pylons import tmpl_context as c
 from pylons.controllers.util import redirect_to
 
 from r2.controllers import add_controller

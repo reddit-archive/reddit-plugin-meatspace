@@ -1,6 +1,6 @@
 import hashlib
 
-from pylons import g
+from pylons import app_globals as g
 
 
 def make_secret_code(meetup, user):

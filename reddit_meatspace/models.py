@@ -1,7 +1,7 @@
 import datetime
 
 from pycassa import types
-from pylons import g
+from pylons import app_globals as g
 
 from r2.lib.db import tdb_cassandra
 from r2.models import Account
