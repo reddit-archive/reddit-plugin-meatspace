@@ -2,7 +2,8 @@ import urllib
 
 from pylons import app_globals as g
 from pylons import tmpl_context as c
-from pylons.controllers.util import redirect_to
+from pylons import url
+from pylons.controllers.util import redirect
 
 from r2.controllers import add_controller
 from r2.controllers.reddit_base import RedditController
@@ -48,7 +49,7 @@ class QrCodeController(RedditController):
     )
     def GET_configure_badge(self, meetup):
         if meetup.state not in BADGE_STATES:
-            return redirect_to("/meetup/%s" % str(meetup._id))
+            return redirect(url("/meetup/%s" % str(meetup._id)))
 
         content = pages.ConversationStarterSelector(meetup, c.user)
         return pages.MeatspacePage(content=content).render()
@@ -60,7 +61,7 @@ class QrCodeController(RedditController):
     )
     def GET_badge(self, meetup, topic):
         if meetup.state not in BADGE_STATES:
-            return redirect_to("/meetup/%s" % str(meetup._id))
+            return redirect(url("/meetup/%s" % str(meetup._id)))
 
         content = pages.QrCodeBadge(meetup, c.user, topic)
         return pages.MeatspaceBadgePage(content=content).render()
@@ -71,7 +72,7 @@ class QrCodeController(RedditController):
     )
     def GET_mobile_badge(self, meetup):
         if meetup.state not in BADGE_STATES:
-            return redirect_to("/meetup/%s" % str(meetup._id))
+            return redirect(url("/meetup/%s" % str(meetup._id)))
 
         content = pages.MobileQrCodeBadge(meetup, c.user)
         return content.render()
@@ -157,5 +158,5 @@ class QrCodeController(RedditController):
             "user": user,
             "code": code,
         })
-        return redirect_to("/meetup/%s/connect?%s" % (str(meetup._id), params),
-                           _code=301)
+        return redirect(
+            url("/meetup/%s/connect?%s" % (str(meetup._id), params)), code=301)
